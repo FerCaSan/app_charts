@@ -1,6 +1,6 @@
 # Charts from csv
 
-To use this project you should:
+To use this project you should do this:
 
 ```sh
 cd charts_reto

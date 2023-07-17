@@ -1,13 +1,14 @@
 import read_file
 import utils
 import charts
+import pandas as pd
 
-if __name__ == '__main__':
+def run():
     
-    country = input("Ingrese país a graficar: ")
+    '''
+    #Using dictionaries and list
+    
     data, dict_perc =  read_file.read_csv('./data.csv')
-    
-    
     
     #To graphic char    
     data_to_graphic = utils.population_country(data, country)
@@ -32,6 +33,40 @@ if __name__ == '__main__':
     
     labels_pie = dict_perc.keys()
     values_pie = dict_perc.values()
-    charts.generate_pie_chart(labels_pie, values_pie)    
+    charts.generate_pie_chart(labels_pie, values_pie)
+    '''
+    
+    #***Pandas***
+    #To graphic char     
+    country = input("Ingrese país a graficar: ")
+    df = pd.read_csv('./data.csv')
+    
+    df_country = df[df['Country'] == country ]
+    df_country.drop(columns=['Country', 'Rank', 'CCA3', 'Capital'
+                             , 'Continent'
+                             , 'Area (km²)', 'Density (per km²)'
+                             , 'Growth Rate', 'World Population Percentage']
+                    , inplace=True)
+    
+    label_popu_per_year = df_country.columns
+    values_popu_per_year = df_country.values.flatten()
+    #Output with flatten: [[51874024 50930662 ....]] -->Array two-dimension
+    #Output without flatten: [51874024 50930662 ....] -->Array one-dimension
+    
+    print(values_popu_per_year)
+    charts.generate_bar_char(label_popu_per_year, values_popu_per_year)
+    
+    
+    
+    #To graphic pie
+    df_percentage = df[df['Continent'] == 'South America']
+    countries = df_percentage['Country'].values
+    percentage = df_percentage['World Population Percentage'].values
+    
+    charts.generate_pie_chart(countries, percentage)                
+    
+if __name__ == '__main__':
+    run()
+  
     
           
