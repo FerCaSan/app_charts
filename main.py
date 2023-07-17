@@ -54,7 +54,7 @@ def run():
     #Output without flatten: [51874024 50930662 ....] -->Array one-dimension
     
     print(values_popu_per_year)
-    charts.generate_bar_char(label_popu_per_year, values_popu_per_year)
+    charts.generate_bar_char(country,label_popu_per_year, values_popu_per_year)
     
     
     
