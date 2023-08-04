@@ -1,0 +1,17 @@
+# Este archivo declara como y donde se va a iniciar el contenedor
+# Definimos etiqueta de servicios
+services:
+#Alias del servcio
+  app-csv:
+    #Construir un serviciodo
+    build:
+      #En que carpeta esta ubicada
+      context: .
+      #Archivo que debe buscar
+      dockerfile: Dockerfile
+    #Etiqueta para enlazar el sistema de archivos - liveview
+    volumes:
+      #Todos los archivos y directorios del proyecto (.) esten enlazados (:)
+      #hacia la carpeta /app que esta en el contendor
+      - .:/app
+

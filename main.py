@@ -3,10 +3,9 @@ import utils
 import charts
 import pandas as pd
 
-def run():
+def data_preparation_dict_list():
     
-    '''
-    #Using dictionaries and list
+    #Function to prepare data using dictionaries and list
     
     data, dict_perc =  read_file.read_csv('./data.csv')
     
@@ -34,9 +33,10 @@ def run():
     labels_pie = dict_perc.keys()
     values_pie = dict_perc.values()
     charts.generate_pie_chart(labels_pie, values_pie)
-    '''
     
-    #***Pandas***
+def data_preparation_pandas():
+    #Function to prepare data using Pandas
+
     #To graphic char     
     country = input("Ingrese país a graficar: ")
     df = pd.read_csv('./data.csv')
@@ -48,6 +48,7 @@ def run():
                              , 'Growth Rate', 'World Population Percentage']
                     , inplace=True)
     
+    
     label_popu_per_year = df_country.columns
     values_popu_per_year = df_country.values.flatten()
     #Output with flatten: [[51874024 50930662 ....]] -->Array two-dimension
@@ -56,14 +57,17 @@ def run():
     print(values_popu_per_year)
     charts.generate_bar_char(country,label_popu_per_year, values_popu_per_year)
     
-    
-    
     #To graphic pie
     df_percentage = df[df['Continent'] == 'South America']
     countries = df_percentage['Country'].values
     percentage = df_percentage['World Population Percentage'].values
     
-    charts.generate_pie_chart(countries, percentage)                
+    charts.generate_pie_chart(countries, percentage) 
+
+def run():
+    #data_preparation_dict_list()
+    data_preparation_pandas()
+             
     
 if __name__ == '__main__':
     run()
